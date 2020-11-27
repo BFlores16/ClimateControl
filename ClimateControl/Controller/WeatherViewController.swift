@@ -8,6 +8,7 @@
  Log to fix:
  * Display error when no location found
  * Login design and constraints
+ * Remove back button on weatherviewcontroller
  */
 
 import UIKit
@@ -31,6 +32,14 @@ class WeatherViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization();
         locationManager.requestLocation();
         // startUpdatingLocation() constantly reports back like for navigation
+        
+        //Remove back button
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        
+        //Make navigation bar transluscent
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
         
         weatherManager.delegate = self;
         searchTextField.delegate = self;

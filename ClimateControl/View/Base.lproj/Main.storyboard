@@ -136,7 +136,14 @@
                             <constraint firstItem="can-OR-uJU" firstAttribute="bottom" secondItem="Wz9-jj-JbA" secondAttribute="bottom" id="xZf-D7-jKn"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Asq-8M-7W8"/>
+                    <navigationItem key="navigationItem" id="Asq-8M-7W8">
+                        <barButtonItem key="rightBarButtonItem" title="Favorites" id="CGH-ei-oiD">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="red-xl-YSB" kind="show" id="ROr-nm-8Mj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="cityLabel" destination="CWP-r8-Jsy" id="8cQ-3l-ufV"/>
                         <outlet property="conditionImageView" destination="mYn-vV-MBC" id="gpD-FU-YB0"/>
@@ -172,6 +179,7 @@
                             <outlet property="delegate" destination="red-xl-YSB" id="8WW-pt-QM9"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="gcu-Ux-Aiz"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ck5-ns-DYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
