@@ -11,6 +11,8 @@ import GoogleSignIn
 import CLTypingLabel
 
 class LoginViewController: UIViewController, GIDSignInDelegate {
+    var idToken: String?
+    var email: String?
     @IBOutlet weak var titleLabel: CLTypingLabel!
     
     // Hides the navigation bar in the welcome screen.
@@ -39,11 +41,11 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        
+        email = GIDSignIn.sharedInstance()?.currentUser.profile.email
         // Check if user sucessfully signed in
         if(GIDSignIn.sharedInstance()?.currentUser != nil)
         {
-            let idToken = user.authentication.idToken
+            idToken = user.authentication.idToken
             performSegue(withIdentifier: "toWeatherView", sender: nil)
         }
         else {
@@ -61,6 +63,14 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     
     @IBAction func signInButtonPressed(_ sender: Any? ) {
         GIDSignIn.sharedInstance().signIn()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "toWeatherView") {
+            let vc = segue.destination as! WeatherViewController
+            vc.user = idToken
+            vc.user = email
+        }
     }
 
 }

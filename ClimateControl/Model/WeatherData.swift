@@ -13,6 +13,7 @@ struct WeatherData: Codable {
     let name: String;
     let main: Main;
     let weather: [Weather];
+    let zipcode: String
 }
 
 struct Main: Codable {

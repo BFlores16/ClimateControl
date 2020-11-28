@@ -13,6 +13,7 @@
 
 import UIKit
 import CoreLocation
+import Firebase
 
 class WeatherViewController: UIViewController {
 
@@ -24,6 +25,9 @@ class WeatherViewController: UIViewController {
     
     var weatherManager = WeatherManager();
     let locationManager = CLLocationManager();
+    let ref = Database.database().reference()
+    var user: String?
+    var locationRef: DatabaseReference?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +47,13 @@ class WeatherViewController: UIViewController {
         
         weatherManager.delegate = self;
         searchTextField.delegate = self;
+        
+        // Define and create a reference to the database
+        //var ref: DatabaseReference!
+        //ref = Database.database().reference()
+        
+        let username = (user?.replacingOccurrences(of: "@gmail.com", with: ""))!
+        locationRef = self.ref.child("Users").child(username)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -52,9 +63,18 @@ class WeatherViewController: UIViewController {
     @IBAction func favoriteButtonPressed(_ sender: UIButton) {
         if (favoriteButton.currentBackgroundImage == UIImage(systemName: "heart")) {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
+            
+            // Add child value
+            locationRef!.child("Locations").updateChildValues(["Scottsdale":"85257"])
+            locationRef!.child("Locations").updateChildValues(["Tempe":"85281"])
+            locationRef!.child("Locations").updateChildValues(["Chandler":"85255"])
+            
+            
         }
         else {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
+            // remove child value
+            locationRef!.child("Locations").child("Chandler").removeValue()
         }
     }
     

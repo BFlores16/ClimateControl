@@ -14,6 +14,8 @@
 		A5785C9C2571F0F400C39AB4 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5785C9B2571F0F400C39AB4 /* FavoriteTableViewCell.swift */; };
 		A5785C9F2571F34800C39AB4 /* dark_background.png in Resources */ = {isa = PBXBuildFile; fileRef = A5785C9E2571F34800C39AB4 /* dark_background.png */; };
 		A5785CA22571F79D00C39AB4 /* night.png in Resources */ = {isa = PBXBuildFile; fileRef = A5785CA12571F79D00C39AB4 /* night.png */; };
+		A5785CB525722EF500C39AB4 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5785CB425722EF500C39AB4 /* Location.swift */; };
+		A5785CB82572356300C39AB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5785CB72572356300C39AB4 /* GoogleService-Info.plist */; };
 		A5E05B092522793F00703F0F /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E05B082522793F00703F0F /* WeatherManager.swift */; };
 		A5E05B0D2522F4B800703F0F /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E05B0C2522F4B800703F0F /* WeatherData.swift */; };
 		ADAA27B1231BBFAF00365194 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA27B0231BBFAF00365194 /* AppDelegate.swift */; };
@@ -36,6 +38,8 @@
 		A5785C9B2571F0F400C39AB4 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		A5785C9E2571F34800C39AB4 /* dark_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dark_background.png; sourceTree = "<group>"; };
 		A5785CA12571F79D00C39AB4 /* night.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = night.png; sourceTree = "<group>"; };
+		A5785CB425722EF500C39AB4 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		A5785CB72572356300C39AB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A5E05B082522793F00703F0F /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		A5E05B0C2522F4B800703F0F /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		ADAA27AD231BBFAF00365194 /* ClimateControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClimateControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +90,7 @@
 				A5E05B0C2522F4B800703F0F /* WeatherData.swift */,
 				A5372E61252ECE640007ECC3 /* WeatherModel.swift */,
 				A5785C9B2571F0F400C39AB4 /* FavoriteTableViewCell.swift */,
+				A5785CB425722EF500C39AB4 /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 				ADAA27B9231BBFB300365194 /* Assets.xcassets */,
 				ADAA27BB231BBFB300365194 /* LaunchScreen.storyboard */,
 				ADAA27BE231BBFB300365194 /* Info.plist */,
+				A5785CB72572356300C39AB4 /* GoogleService-Info.plist */,
 				ADAA27C5231BC02B00365194 /* dark_background.pdf */,
 				ADAA27C4231BC02B00365194 /* light_background.pdf */,
 				A5785C9E2571F34800C39AB4 /* dark_background.png */,
@@ -207,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADAA27C7231BC02C00365194 /* dark_background.pdf in Resources */,
+				A5785CB82572356300C39AB4 /* GoogleService-Info.plist in Resources */,
 				ADAA27BD231BBFB300365194 /* LaunchScreen.storyboard in Resources */,
 				ADAA27BA231BBFB300365194 /* Assets.xcassets in Resources */,
 				A5785C9F2571F34800C39AB4 /* dark_background.png in Resources */,
@@ -284,6 +291,7 @@
 			files = (
 				A5785C792570AABA00C39AB4 /* LoginViewController.swift in Sources */,
 				ADAA27B5231BBFAF00365194 /* WeatherViewController.swift in Sources */,
+				A5785CB525722EF500C39AB4 /* Location.swift in Sources */,
 				A5E05B0D2522F4B800703F0F /* WeatherData.swift in Sources */,
 				A5785C992571D21800C39AB4 /* FavoritesTableViewController.swift in Sources */,
 				A5785C9C2571F0F400C39AB4 /* FavoriteTableViewCell.swift in Sources */,

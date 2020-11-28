@@ -92,11 +92,16 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="85205" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hog-2P-P47">
+                                        <rect key="frame" x="297.66666666666669" y="355.66666666666669" width="90.333333333333314" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ti-bh-8Fw">
-                                        <rect key="frame" x="0.0" y="355.66666666666674" width="388" height="448.33333333333326"/>
+                                        <rect key="frame" x="0.0" y="401.66666666666674" width="388" height="402.33333333333326"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IuC-tb-V5f">
-                                                <rect key="frame" x="139" y="300.33333333333331" width="110" height="97"/>
+                                                <rect key="frame" x="139" y="254.33333333333331" width="110" height="97"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="01j-0F-68J"/>
                                                     <constraint firstAttribute="height" constant="100" id="VbN-Lv-OLm"/>
@@ -242,7 +247,9 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="cpi-eU-YKH"/>
+        <designable name="cpi-eU-YKH">
+            <size key="intrinsicContentSize" width="308.33333333333331" height="42"/>
+        </designable>
     </designables>
     <resources>
         <image name="BackgroundMode" width="836" height="661"/>

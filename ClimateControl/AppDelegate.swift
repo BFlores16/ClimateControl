@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleSignIn
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -23,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //configure the GIDSignIn shared instance and set the sign-in delegate.
           GIDSignIn.sharedInstance().clientID = "547670471911-620s8p7c3ter8g4bg7v9gceun068v43g.apps.googleusercontent.com"
           GIDSignIn.sharedInstance().delegate = self
+        
+        // Use Firebase library to configure APIs
+        FirebaseApp.configure()
         
         // Override point for customization after application launch.
         return true
