@@ -8,5 +8,6 @@ target 'ClimateControl' do
   # Pods for ClimateControl
 	pod 'GoogleSignIn'
 	pod 'CLTypingLabel', '~> 0.4.0'
+	pod 'Firebase/Database'
 
 end
