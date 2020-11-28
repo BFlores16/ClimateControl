@@ -140,7 +140,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Favorites" id="CGH-ei-oiD">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="red-xl-YSB" kind="show" id="ROr-nm-8Mj"/>
+                                <segue destination="1v4-uQ-13O" kind="show" id="tEg-KI-IFy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -156,34 +156,34 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="-452.00892857142856"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="u9X-WS-5oH">
+        <!--Favorites Table View Controller-->
+        <scene sceneID="SYH-jj-PAb">
             <objects>
-                <tableViewController id="red-xl-YSB" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fjo-zL-Huv">
+                <tableViewController id="1v4-uQ-13O" customClass="FavoritesTableViewController" customModule="ClimateControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="t4U-Sn-QZ1">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="fdI-Pz-aNG">
-                                <rect key="frame" x="0.0" y="28" width="428" height="43.666667938232422"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="uYB-1g-mkj" customClass="FavoriteTableViewCell" customModule="ClimateControl" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="428" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fdI-Pz-aNG" id="UhN-tc-Acv">
-                                    <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uYB-1g-mkj" id="CDu-c9-rB8">
+                                    <rect key="frame" x="0.0" y="0.0" width="428" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="red-xl-YSB" id="REh-8a-c9V"/>
-                            <outlet property="delegate" destination="red-xl-YSB" id="8WW-pt-QM9"/>
+                            <outlet property="dataSource" destination="1v4-uQ-13O" id="Ciq-ez-87k"/>
+                            <outlet property="delegate" destination="1v4-uQ-13O" id="Dxn-fP-UvG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="gcu-Ux-Aiz"/>
+                    <navigationItem key="navigationItem" id="Jqg-or-rrS"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ck5-ns-DYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fly-4e-FFC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1945" y="-452"/>
+            <point key="canvasLocation" x="1956" y="-452"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Hi2-pD-sCS">
