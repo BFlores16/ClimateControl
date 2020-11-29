@@ -52,12 +52,27 @@ class WeatherViewController: UIViewController {
         weatherManager.delegate = self;
         searchTextField.delegate = self;
         
+        
+        
         // Define and create a reference to the database
         //var ref: DatabaseReference!
         //ref = Database.database().reference()
         
         //let username = (user?.replacingOccurrences(of: "@gmail.com", with: ""))!
         //locationRef = self.ref.child("Users").child(username)
+        locationRef = Database.database().reference()
+        locationRef = ref.child("Users").child("xxperencexx")
+        locationRef?.child("Locations").observeSingleEvent(of: .value, with: { (snapshot) in
+
+            if snapshot.hasChild(self.cityLabel.text! ){
+                self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
+
+                }else{
+                    self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
+                }
+
+
+            })
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -67,18 +82,19 @@ class WeatherViewController: UIViewController {
     @IBAction func favoriteButtonPressed(_ sender: UIButton) {
         if (favoriteButton.currentBackgroundImage == UIImage(systemName: "heart")) {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
-            
+            locationRef = self.ref.child("Users").child("xxperencexx")
             // Add child value
-            locationRef!.child("Locations").updateChildValues(["Scottsdale":"85257"])
-            locationRef!.child("Locations").updateChildValues(["Tempe":"85281"])
-            locationRef!.child("Locations").updateChildValues(["Chandler":"85255"])
+            //locationRef!.child("Locations").updateChildValues(["Scottsdale":"85257"])
+            //locationRef!.child("Locations").updateChildValues(["Tempe":"85281"])
+            print(cityLabel.text!)
+            locationRef!.child("Locations").updateChildValues([cityLabel.text!:"85205"])
             
             
         }
         else {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
             // remove child value
-            locationRef!.child("Locations").child("Chandler").removeValue()
+            locationRef!.child("Locations").child(weatherCopy?.cityName ?? "").removeValue()
         }
     }
     
@@ -277,21 +293,28 @@ extension WeatherViewController: WeatherManagerDelegate {
             self.conditionImageView.image = UIImage(systemName: weather.conditionName )
             self.cityLabel.text = weather.cityName;
             self.zipcodeLabel.text = countryCode
+            self.weatherCopy = weather
+            print(self.weatherCopy?.cityName)
             print(countryCode)
             print("fourth")
+            
+            
+            self.locationRef = Database.database().reference()
+            self.locationRef = self.ref.child("Users").child("xxperencexx")
+            self.locationRef?.child("Locations").observeSingleEvent(of: .value, with: { (snapshot) in
+
+                if snapshot.hasChild(self.cityLabel.text! ){
+                    self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
+
+                    }else{
+                        self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
+                    }
+
+
+                })
         }
 
         print("fifth")
-    }
-    
-    func didUpdateWeatherSearch( _ weatherManager: WeatherManager, weather: WeatherModel ) {
-        DispatchQueue.main.async {
-
-            self.temperatureLabel.text = weather.temp;
-            self.conditionImageView.image = UIImage(systemName: weather.conditionName )
-            self.cityLabel.text = weather.cityName;
-            self.zipcodeLabel.text = countryCode
-        }
     }
     
     func updateWeather(zip: String) {
@@ -314,6 +337,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
             let lat = location.coordinate.latitude;
             let lon = location.coordinate.longitude;
             weatherManager.fetchWeather(latitude: lat, longitude: lon );
+        
         }
     }
     
