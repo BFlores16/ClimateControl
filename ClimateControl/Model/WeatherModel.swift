@@ -12,6 +12,9 @@ struct WeatherModel {
     let conditionID: Int;
     let cityName: String;
     let temperature: Double;
+    let zipcode: String
+    let lat: Double
+    let lon: Double
     
     // Known as a computed property
     var conditionName: String {
