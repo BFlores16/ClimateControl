@@ -32,6 +32,7 @@ class WeatherViewController: UIViewController {
     var locationRef: DatabaseReference?
     var weatherCopy: WeatherModel?
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=16c440cd417d067c3f006009652f7b14&units=imperial";
+    var locationsList = [Location]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +74,7 @@ class WeatherViewController: UIViewController {
 
 
             })
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -83,10 +85,8 @@ class WeatherViewController: UIViewController {
         if (favoriteButton.currentBackgroundImage == UIImage(systemName: "heart")) {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
             locationRef = self.ref.child("Users").child("xxperencexx")
-            // Add child value
-            //locationRef!.child("Locations").updateChildValues(["Scottsdale":"85257"])
-            //locationRef!.child("Locations").updateChildValues(["Tempe":"85281"])
-            print(cityLabel.text!)
+
+            // Add a location to the database
             locationRef!.child("Locations").updateChildValues([cityLabel.text!:"85205"])
             
             
@@ -96,6 +96,32 @@ class WeatherViewController: UIViewController {
             // remove child value
             locationRef!.child("Locations").child(weatherCopy?.cityName ?? "").removeValue()
         }
+    }
+    
+    func loadLocationsFromDatabase(_ completion: (() -> Void)?) {
+        locationsList.removeAll()
+        locationRef = ref.child("Users").child("xxperencexx")
+        
+        // Get each key-value pair in the database
+        locationRef!.child("Locations").observeSingleEvent(of: .value, with: { (snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot] {
+                let loc = Location(cityName: child.key, zipcode: child.value as? String)
+                self.locationsList.append(loc)
+            }
+            completion?()
+        })
+    }
+    @IBAction func favoritesButtonPressed(_ sender: UIBarButtonItem) {
+        loadLocationsFromDatabase {
+            self.performSegue(withIdentifier: "toFavoriteTableView", sender: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "toFavoriteTableView" {
+                let vc = segue.destination as! FavoritesTableViewController
+                vc.locationsList = self.locationsList
+            }
     }
     
 }
@@ -177,97 +203,6 @@ extension WeatherViewController: UITextFieldDelegate {
         }
 }
 
-/*
-func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) -> String {
-    var countryCode:String? = ""
-    if let error = error {
-        print("Unable to Reverse Geocode Location (\(error))")
-    } else {
-        if let placemarks = placemarks, let placemark = placemarks.first {
-            //locationLabel.text = placemark.compactAddress
-            countryCode = placemark.isoCountryCode ?? "No Postal Code Found"
-            print(placemark.isoCountryCode)
-            print(placemark.postalCode)
-        } else {
-            countryCode = "No Postal Code Found"
-        }
-    }
-    return countryCode!
-}
-
-func geocode(lat: Double, lon: Double) -> String {
-    var code:String? = ""
-    // Create location
-    let location = CLLocation(latitude: lat, longitude: lon)
-    
-    // Geocode Location
-    /*geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-        // Process Response
-        code = processResponse(withPlacemarks: placemarks, error: error)
-    }*/
-    // Reverse Geocode a CLLocation to a CLPlacemark
-    
-    print("Country code test: \(code)")
-    return code!
-}
-
-func geocode(latitude: Double, longitude: Double, completion: @escaping (_ placemark: [CLPlacemark]?, _ error: Error?) -> Void)  {
-    CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude), completionHandler: completion)
-}
-
-func parseJSON(weatherData: Data) -> WeatherModel? {
-    let decoder = JSONDecoder();
-    
-    do {
-        let decodedData = try decoder.decode(WeatherData.self, from: weatherData);
-    
-        lat = decodedData.coord.lat
-        lon = decodedData.coord.lon
-        
-        let location = CLLocation(latitude: -22.963451, longitude: -43.198242)
-        location.geocode { placemark, error in
-            if let error = error as? CLError {
-                print("CLError:", error)
-                return
-            } else if let placemark = placemark?.first {
-                // you should always update your UI in the main thread
-                DispatchQueue.main.async {
-                    //  update UI here
-                    print("name:", placemark.name ?? "unknown")
-
-                    print("address1:", placemark.thoroughfare ?? "unknown")
-                    print("address2:", placemark.subThoroughfare ?? "unknown")
-                    print("neighborhood:", placemark.subLocality ?? "unknown")
-                    print("city:", placemark.locality ?? "unknown")
-
-                    print("state:", placemark.administrativeArea ?? "unknown")
-                    print("subAdministrativeArea:", placemark.subAdministrativeArea ?? "unknown")
-                    
-                    print("zip code:", placemark.postalCode ?? "unknown")
-                    
-                    print("country:", placemark.country ?? "unknown", terminator: "\n\n")
-
-                    print("isoCountryCode:", placemark.isoCountryCode ?? "unknown")
-                    print("region identifier:", placemark.region?.identifier ?? "unknown")
-
-                    print("timezone:", placemark.timeZone ?? "unknown", terminator:"\n\n")
-
-                }
-            }
-        }
-
-        
-        let zip = geocode(lat: lat, lon: lon)
-        let id = decodedData.weather[0].id;
-        let temp = decodedData.main.temp;
-        let name = decodedData.name;
-        let weather = WeatherModel(conditionID: id, cityName: name, temperature: temp, zipcode: zip, lat: lat, lon: lon);
-        return weather;
-    } catch {
-        //delegate?.didFailWithError(error: error);
-        return nil;
-    }
-}*/
 
 func isInt(string: String) -> Bool {
     return Int(string) != nil
@@ -294,7 +229,7 @@ extension WeatherViewController: WeatherManagerDelegate {
             self.cityLabel.text = weather.cityName;
             self.zipcodeLabel.text = countryCode
             self.weatherCopy = weather
-            print(self.weatherCopy?.cityName)
+            print(self.weatherCopy?.cityName as Any)
             print(countryCode)
             print("fourth")
             

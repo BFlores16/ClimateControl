@@ -9,6 +9,6 @@
 import Foundation
 
 struct Location: Hashable {
-    let zipcode: Int?
     let cityName: String?
+    let zipcode: String?
 }
