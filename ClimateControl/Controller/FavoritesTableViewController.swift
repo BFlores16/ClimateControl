@@ -24,20 +24,22 @@ class FavoritesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set the background of the tableview
         var imageView = UIImageView(image: UIImage(named: "dark_background.png"))
         imageView.contentMode = .scaleAspectFit
         self.tableView.backgroundView = imageView
+        
+        // Make the cells clear
         tableView.tableFooterView = UIView()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         //cell.layer.backgroundColor = UIColor.clear.cgColor
-        //loadLocationsFromDatabase {
-          //  print(self.locationsList)
-        //}
-        //locationsList.append(Location(cityName: "test", zipcode: "test"))
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,30 +76,14 @@ class FavoritesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Get the selected location and send it back to WeatherViewController.
+        // Then dismiss the segue
         selectedLocation = locationsList[indexPath.row]
         self.delegate?.sendBackLocation(selected: selectedLocation)
-        print(selectedLocation)
-        /*if let viewController = storyboard?.instantiateViewController(identifier: "WeatherViewController") as? WeatherViewController {
-            viewController.selectedLocation = selectedLocation
-            navigationController?.pushViewController(viewController, animated: true)
-        }*/
         self.navigationController?.popViewController(animated: true)
         
     }
     
-    /*func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
-            let selected = locationsList[indexPath.row]
-            delegate?.didSelectTableViewCell(selected: selected)
-    
-    }*/
-    
-    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! WeatherViewController
-        vc.selectedLocation = selectedLocation
-        vc.viewDidLoad()
-    }*/
-    
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

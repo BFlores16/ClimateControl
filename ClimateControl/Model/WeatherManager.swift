@@ -31,7 +31,6 @@ struct WeatherManager {
     func fetchWeather( cityName: String ) {
         let urlString = "\(weatherURL)&q=\(cityName)"
         performRequest(with: urlString);
-        print("third")
         self.delegate?.didUpdateWeather(self, weather: weatherCopy!)
     }
     
@@ -66,26 +65,25 @@ struct WeatherManager {
                     if let weather = self.parseJSON(weatherData: safeData) {
                         self.delegate?.didUpdateWeather(self, weather: weather);
                         weatherCopy = weather
-                        print(weatherCopy)
                     }
                 }
             }
             //4. start the task
             task.resume();
         }
-        print("first")
     }
     
     func parseJSON(weatherData: Data) -> WeatherModel? {
         let decoder = JSONDecoder();
         
+        /*
+         * Get the latitude and longitude of the area and use it to find the
+         * locations postal code with the geocode function
+         */
         do {
             let decodedData = try decoder.decode(WeatherData.self, from: weatherData);
-
             lat = decodedData.coord.lat
             lon = decodedData.coord.lon
-            
-            
             let id = decodedData.weather[0].id;
             let temp = decodedData.main.temp;
             let name = decodedData.name;
@@ -122,7 +120,6 @@ struct WeatherManager {
             // Process Response
             countryCode = self.processResponse(withPlacemarks: placemarks, error: error)
         }
-        print("second")
     }
     
 }

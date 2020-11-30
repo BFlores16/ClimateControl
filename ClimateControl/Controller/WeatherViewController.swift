@@ -7,8 +7,6 @@
 /*
  Log to fix:
  * Display error when no location found
- * Login design and constraints
- * Remove back button on weatherviewcontroller
  */
 
 import UIKit
@@ -22,7 +20,7 @@ class WeatherViewController: UIViewController, FavoritesTableViewControllerDeleg
         selectedLocation = location
         weatherManager.fetchWeather(cityName: location.cityName!)
     }
-
+    
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
@@ -68,16 +66,16 @@ class WeatherViewController: UIViewController, FavoritesTableViewControllerDeleg
         locationRef = Database.database().reference()
         locationRef = ref.child("Users").child(username)
         locationRef?.child("Locations").observeSingleEvent(of: .value, with: { (snapshot) in
-
+            
             if snapshot.hasChild(self.cityLabel.text! ){
                 self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
-
-                }else{
-                    self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
-                }
-
-
-            })
+                
+            }else{
+                self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
+            }
+            
+            
+        })
         
     }
     
@@ -90,7 +88,7 @@ class WeatherViewController: UIViewController, FavoritesTableViewControllerDeleg
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
             let username = (user?.replacingOccurrences(of: "@gmail.com", with: ""))!
             locationRef = self.ref.child("Users").child(username)
-
+            
             // Add a location to the database
             locationRef!.child("Locations").updateChildValues([cityLabel.text!:"85205"])
             
@@ -129,13 +127,13 @@ class WeatherViewController: UIViewController, FavoritesTableViewControllerDeleg
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "toFavoriteTableView" {
-                let vc = segue.destination as! FavoritesTableViewController
-                vc.delegate = self
-                vc.locationsList = self.locationsList
-            }
+        if segue.identifier == "toFavoriteTableView" {
+            let vc = segue.destination as! FavoritesTableViewController
+            vc.delegate = self
+            vc.locationsList = self.locationsList
+        }
     }
-
+    
     
 }
 
@@ -180,43 +178,16 @@ extension WeatherViewController: UITextFieldDelegate {
         }
         else {
             if let city = searchTextField.text {
-               weatherManager.fetchWeather(cityName: city);
-                /*let urlString = "\(weatherURL)&q=\(city)"
-                //1. create a url
-                if let url = URL(string: urlString) {
-                    //2. create a url session
-                    let session = URLSession(configuration: .default);
-                    
-                    //3. give the session a task
-                    let task = session.dataTask(with: url) { [self] (data, response, error) in
-                        if error != nil {
-                            //self.delegate?.didFailWithError(error: error!)
-                            return;
-                        }
-                        
-                        if let safeData = data {
-                               weatherCopy = parseJSON(weatherData: safeData)
-                                //self.delegate?.didUpdateWeather(self, weather: weather);
-                                //weatherCopy = weather
-                                print("first")
-                            print(weatherCopy?.zipcode)
-                            DispatchQueue.main.async {
-                                print("second")
-                                print(weatherCopy?.zipcode)
-                            }
-                        }
-                    }
-                    //4. start the task
-                    task.resume();
-                }*/
+                weatherManager.fetchWeather(cityName: city);
             }
         }
-        //geocode(lat: weatherCopy!.lon, lon: weatherCopy!.lon)
         searchTextField.text = "";
-        }
+    }
 }
 
-
+/*
+ * Checks if a given string is and INT
+ */
 func isInt(string: String) -> Bool {
     return Int(string) != nil
 }
@@ -231,10 +202,9 @@ extension WeatherViewController: WeatherManagerDelegate {
     
     func didUpdateWeather( _ weatherManager: WeatherManager, weather: WeatherModel ) {
         let queue = DispatchQueue(label: "update")
-
+        
         queue.async {
             countryCode = weather.zipcode
-            print(countryCode)
         }
         DispatchQueue.main.async {
             self.temperatureLabel.text = weather.temp;
@@ -242,34 +212,29 @@ extension WeatherViewController: WeatherManagerDelegate {
             self.cityLabel.text = weather.cityName;
             self.zipcodeLabel.text = countryCode
             self.weatherCopy = weather
-            print(self.weatherCopy?.cityName as Any)
-            print(countryCode)
-            print("fourth")
             
-            
+            /*
+             * Get the current user to manage database
+             */
             let username = (self.user?.replacingOccurrences(of: "@gmail.com", with: ""))!
             self.locationRef = Database.database().reference()
             self.locationRef = self.ref.child("Users").child(username)
             self.locationRef?.child("Locations").observeSingleEvent(of: .value, with: { (snapshot) in
-
+                
+                // Automatically manage how the user percieves the favorites button.
+                // Once a user selects/deselects a location, it will update the
+                // heart image to reflect its status in the database
                 if snapshot.hasChild(self.cityLabel.text! ){
                     self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
-
-                    }else{
-                        self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
-                    }
-
-
-                })
+                    
+                }else{
+                    self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
+                }
+                
+                
+            })
         }
-
-        print("fifth")
     }
-    
-    func updateWeather(zip: String) {
-        self.zipcodeLabel.text = zip
-    }
-
 }
 
 
@@ -286,7 +251,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
             let lat = location.coordinate.latitude;
             let lon = location.coordinate.longitude;
             weatherManager.fetchWeather(latitude: lat, longitude: lon );
-        
+            
         }
     }
     
