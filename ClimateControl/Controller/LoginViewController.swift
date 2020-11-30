@@ -14,6 +14,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     var idToken: String?
     var email: String?
     @IBOutlet weak var titleLabel: CLTypingLabel!
+
+    
+    
     
     // Hides the navigation bar in the welcome screen.
     // We do this here an dfollow up for the other screens
@@ -26,6 +29,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         super.viewWillDisappear(animated);
         super.navigationController?.isNavigationBarHidden = false;
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,16 +39,20 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.presentingViewController = self
 
         // Automatically sign in the user.
-        //GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         
         GIDSignIn.sharedInstance().delegate = self
+        
+        // Customize sign in button
+        //signInButton.style = GIDSignInButtonStyle.iconOnly
+        // ^ Too small, will create custom
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        email = GIDSignIn.sharedInstance()?.currentUser.profile.email
         // Check if user sucessfully signed in
         if(GIDSignIn.sharedInstance()?.currentUser != nil)
         {
+            email = GIDSignIn.sharedInstance()?.currentUser.profile.email
             idToken = user.authentication.idToken
             performSegue(withIdentifier: "toWeatherView", sender: nil)
         }
@@ -53,7 +61,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         }
         
     }
-
     
     // use the signOut method of the GIDSignIn object to sign out your user on the current device
     @IBAction func didTapSignOut(_ sender: AnyObject) {
@@ -61,7 +68,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     }
     
     
-    @IBAction func signInButtonPressed(_ sender: Any? ) {
+    @IBAction func signInButtonPressed(_ sender: UIButton? ) {
         GIDSignIn.sharedInstance().signIn()
     }
     

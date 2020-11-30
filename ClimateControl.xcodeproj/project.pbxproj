@@ -16,6 +16,9 @@
 		A5785CA22571F79D00C39AB4 /* night.png in Resources */ = {isa = PBXBuildFile; fileRef = A5785CA12571F79D00C39AB4 /* night.png */; };
 		A5785CB525722EF500C39AB4 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5785CB425722EF500C39AB4 /* Location.swift */; };
 		A5785CB82572356300C39AB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5785CB72572356300C39AB4 /* GoogleService-Info.plist */; };
+		A5785CCE2574858400C39AB4 /* loginBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A5785CCD2574858400C39AB4 /* loginBackground.png */; };
+		A5785CD12574880A00C39AB4 /* loginArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A5785CD02574880A00C39AB4 /* loginArrow.png */; };
+		A5785CD425748F0D00C39AB4 /* googleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A5785CD325748F0D00C39AB4 /* googleButton.png */; };
 		A5E05B092522793F00703F0F /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E05B082522793F00703F0F /* WeatherManager.swift */; };
 		A5E05B0D2522F4B800703F0F /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E05B0C2522F4B800703F0F /* WeatherData.swift */; };
 		ADAA27B1231BBFAF00365194 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA27B0231BBFAF00365194 /* AppDelegate.swift */; };
@@ -40,6 +43,9 @@
 		A5785CA12571F79D00C39AB4 /* night.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = night.png; sourceTree = "<group>"; };
 		A5785CB425722EF500C39AB4 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		A5785CB72572356300C39AB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A5785CCD2574858400C39AB4 /* loginBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginBackground.png; sourceTree = "<group>"; };
+		A5785CD02574880A00C39AB4 /* loginArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginArrow.png; sourceTree = "<group>"; };
+		A5785CD325748F0D00C39AB4 /* googleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = googleButton.png; sourceTree = "<group>"; };
 		A5E05B082522793F00703F0F /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		A5E05B0C2522F4B800703F0F /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		ADAA27AD231BBFAF00365194 /* ClimateControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClimateControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +135,9 @@
 				ADAA27C4231BC02B00365194 /* light_background.pdf */,
 				A5785C9E2571F34800C39AB4 /* dark_background.png */,
 				A5785CA12571F79D00C39AB4 /* night.png */,
+				A5785CCD2574858400C39AB4 /* loginBackground.png */,
+				A5785CD02574880A00C39AB4 /* loginArrow.png */,
+				A5785CD325748F0D00C39AB4 /* googleButton.png */,
 			);
 			path = ClimateControl;
 			sourceTree = "<group>";
@@ -215,9 +224,12 @@
 				ADAA27C7231BC02C00365194 /* dark_background.pdf in Resources */,
 				A5785CB82572356300C39AB4 /* GoogleService-Info.plist in Resources */,
 				ADAA27BD231BBFB300365194 /* LaunchScreen.storyboard in Resources */,
+				A5785CCE2574858400C39AB4 /* loginBackground.png in Resources */,
 				ADAA27BA231BBFB300365194 /* Assets.xcassets in Resources */,
 				A5785C9F2571F34800C39AB4 /* dark_background.png in Resources */,
+				A5785CD425748F0D00C39AB4 /* googleButton.png in Resources */,
 				ADAA27B8231BBFAF00365194 /* Main.storyboard in Resources */,
+				A5785CD12574880A00C39AB4 /* loginArrow.png in Resources */,
 				ADAA27C6231BC02C00365194 /* light_background.pdf in Resources */,
 				A5785CA22571F79D00C39AB4 /* night.png in Resources */,
 			);
