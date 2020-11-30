@@ -14,7 +14,7 @@
 import UIKit
 import CoreLocation
 import Firebase
-
+import GoogleSignIn
 
 class WeatherViewController: UIViewController, FavoritesTableViewControllerDelegate {
     
@@ -121,6 +121,11 @@ class WeatherViewController: UIViewController, FavoritesTableViewControllerDeleg
         loadLocationsFromDatabase {
             self.performSegue(withIdentifier: "toFavoriteTableView", sender: nil)
         }
+    }
+    
+    @IBAction func signOutButtonPressed(_ sender: UIBarButtonItem) {
+        GIDSignIn.sharedInstance().signOut()
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

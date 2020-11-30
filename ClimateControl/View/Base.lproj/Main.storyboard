@@ -142,6 +142,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Asq-8M-7W8">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="EUN-gD-g3P">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="signOutButtonPressed:" destination="BYZ-38-t0r" id="bd4-DX-EBl"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Favorites" id="CGH-ei-oiD">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>

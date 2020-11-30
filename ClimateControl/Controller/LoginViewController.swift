@@ -15,9 +15,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     var email: String?
     @IBOutlet weak var titleLabel: CLTypingLabel!
 
-    
-    
-    
     // Hides the navigation bar in the welcome screen.
     // We do this here an dfollow up for the other screens
     override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +69,10 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         GIDSignIn.sharedInstance().signIn()
     }
     
+    /*
+     * Send the username to the next view controller to update the correct
+     * database
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toWeatherView") {
             let vc = segue.destination as! WeatherViewController
