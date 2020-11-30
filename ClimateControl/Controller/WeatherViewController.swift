@@ -16,7 +16,12 @@ import CoreLocation
 import Firebase
 
 
-class WeatherViewController: UIViewController {
+class WeatherViewController: UIViewController, FavoritesTableViewControllerDelegate {
+    
+    func sendBackLocation(selected location: Location) {
+        selectedLocation = location
+        weatherManager.fetchWeather(cityName: location.cityName!)
+    }
 
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -33,6 +38,7 @@ class WeatherViewController: UIViewController {
     var weatherCopy: WeatherModel?
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=16c440cd417d067c3f006009652f7b14&units=imperial";
     var locationsList = [Location]()
+    var selectedLocation:Location = Location(cityName: "", zipcode: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,16 +59,14 @@ class WeatherViewController: UIViewController {
         weatherManager.delegate = self;
         searchTextField.delegate = self;
         
-        
-        
         // Define and create a reference to the database
         //var ref: DatabaseReference!
         //ref = Database.database().reference()
         
-        //let username = (user?.replacingOccurrences(of: "@gmail.com", with: ""))!
-        //locationRef = self.ref.child("Users").child(username)
+        let username = (user?.replacingOccurrences(of: "@gmail.com", with: ""))!
+        locationRef = self.ref.child("Users").child(username)
         locationRef = Database.database().reference()
-        locationRef = ref.child("Users").child("xxperencexx")
+        locationRef = ref.child("Users").child(username)
         locationRef?.child("Locations").observeSingleEvent(of: .value, with: { (snapshot) in
 
             if snapshot.hasChild(self.cityLabel.text! ){
@@ -84,7 +88,8 @@ class WeatherViewController: UIViewController {
     @IBAction func favoriteButtonPressed(_ sender: UIButton) {
         if (favoriteButton.currentBackgroundImage == UIImage(systemName: "heart")) {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
-            locationRef = self.ref.child("Users").child("xxperencexx")
+            let username = (user?.replacingOccurrences(of: "@gmail.com", with: ""))!
+            locationRef = self.ref.child("Users").child(username)
 
             // Add a location to the database
             locationRef!.child("Locations").updateChildValues([cityLabel.text!:"85205"])
@@ -100,7 +105,8 @@ class WeatherViewController: UIViewController {
     
     func loadLocationsFromDatabase(_ completion: (() -> Void)?) {
         locationsList.removeAll()
-        locationRef = ref.child("Users").child("xxperencexx")
+        let username = (user?.replacingOccurrences(of: "@gmail.com", with: ""))!
+        locationRef = ref.child("Users").child(username)
         
         // Get each key-value pair in the database
         locationRef!.child("Locations").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -120,9 +126,11 @@ class WeatherViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             if segue.identifier == "toFavoriteTableView" {
                 let vc = segue.destination as! FavoritesTableViewController
+                vc.delegate = self
                 vc.locationsList = self.locationsList
             }
     }
+
     
 }
 
@@ -234,8 +242,9 @@ extension WeatherViewController: WeatherManagerDelegate {
             print("fourth")
             
             
+            let username = (self.user?.replacingOccurrences(of: "@gmail.com", with: ""))!
             self.locationRef = Database.database().reference()
-            self.locationRef = self.ref.child("Users").child("xxperencexx")
+            self.locationRef = self.ref.child("Users").child(username)
             self.locationRef?.child("Locations").observeSingleEvent(of: .value, with: { (snapshot) in
 
                 if snapshot.hasChild(self.cityLabel.text! ){

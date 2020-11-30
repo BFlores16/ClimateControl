@@ -9,12 +9,18 @@
 import UIKit
 import Firebase
 
+protocol FavoritesTableViewControllerDelegate {
+    func sendBackLocation(selected location: Location)
+}
+
 class FavoritesTableViewController: UITableViewController {
     
     //MARK: Properties
     var locationsList = [Location]()
     let ref = Database.database().reference()
     var locationRef: DatabaseReference?
+    var selectedLocation:Location = Location(cityName: "", zipcode: "")
+    var delegate: FavoritesTableViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,9 +69,33 @@ class FavoritesTableViewController: UITableViewController {
         
         let location = locationsList[indexPath.row]
         cell.cityNameLabel.text = location.cityName
-
+        
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedLocation = locationsList[indexPath.row]
+        self.delegate?.sendBackLocation(selected: selectedLocation)
+        print(selectedLocation)
+        /*if let viewController = storyboard?.instantiateViewController(identifier: "WeatherViewController") as? WeatherViewController {
+            viewController.selectedLocation = selectedLocation
+            navigationController?.pushViewController(viewController, animated: true)
+        }*/
+        self.navigationController?.popViewController(animated: true)
+        
+    }
+    
+    /*func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
+            let selected = locationsList[indexPath.row]
+            delegate?.didSelectTableViewCell(selected: selected)
+    
+    }*/
+    
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! WeatherViewController
+        vc.selectedLocation = selectedLocation
+        vc.viewDidLoad()
+    }*/
     
 
     /*
